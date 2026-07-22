@@ -39,6 +39,6 @@ authRouter.get("/get-me", authMiddleware, authController.getMe)
  * @query { token }
  * @returns { success, message }
  */
-authRouter.get("/verify-email", authMiddleware ,authController.verifyEmail)
+authRouter.get("/verify-email", authController.verifyEmail)
 
 export default authRouter

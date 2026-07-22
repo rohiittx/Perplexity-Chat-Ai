@@ -59,7 +59,7 @@ async function userRegister(req, res) {
 
 async function verifyEmail(req,res) {
      
-    const {token} = req.query
+    const { token } = req.query
 
     try {
         const decoded = jwt.verify( token , process.env.JWT_SECRET)
@@ -80,7 +80,7 @@ async function verifyEmail(req,res) {
 
         const Html = `
             <h1> Email verified successfully </h1>
-            <p> Your email has been verified. you can now log in toyour account. </p>
+            <p> Your email has been verified. you can now log in to your account. </p>
             <a href="http://localhost:3000/login"> Go to Login </a>
         `
         
@@ -116,6 +116,9 @@ async function userLogin(req, res) {
             err:"email not verified"
         })
     }
+
+    console.log("Entered password:", password)
+    console.log("Stored hash:", user.password)
 
     const isPasswordValid = await user.comparePassword(password)
 
