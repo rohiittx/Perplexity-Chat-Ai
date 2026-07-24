@@ -46,6 +46,7 @@ export async function generateTitle(message) { // title generate krne k liye ai 
             Do not add any extra text or explanation. Only provide the title.
 
             `),
+        // user ka msg bhej rhe h
         new HumanMessage(`Generate a title for the following first text: ${message}`)
     ])
 

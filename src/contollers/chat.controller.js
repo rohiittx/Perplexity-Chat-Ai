@@ -8,7 +8,7 @@ import messageModel from "../models/message.model.js"
  */
 export async function sendMessage(req,res) {
     
-    const { message, chat: chatId } = req.body  // jo bhi msg aara hoga vo req.body se aayega or ye msg ham bhej rhe h ai ko
+    const { message , chat: chatId } = req.body  // jo bhi msg aara hoga vo req.body se aayega or ye msg ham bhej rhe h ai ko
     
     let title = null , chat = null // title or chat ko null se initialize kr rhe h kyu ki agar user ka chat id hoga to title or chat ko null hi rehne denge or agar user ka chat id nhi hoga to title generate krke chat me save kr denge
     
