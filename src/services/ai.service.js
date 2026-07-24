@@ -1,10 +1,10 @@
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { HumanMessage , SystemMessage } from "langchain"
+import { AIMessage, HumanMessage , SystemMessage } from "langchain"
 import { ChatMistralAI, MistralAI } from "@langchain/mistralai"
 
 const model = new ChatMistralAI({
-model: "mistral-large-latest",
-temperature: 0
+    model: "mistral-large-latest",
+    temperature: 0
 });
 
 const geminimodel = new ChatGoogleGenerativeAI({
@@ -17,17 +17,22 @@ const mistralModel = new ChatMistralAI({
     apiKey: process.env.MISTRAL_API_KEY
 })
 
-export async function generateResponse(message) { // user ka msg ai ko bhej rhe h or ai ka response hame milega
+export async function generateResponse(messages) { // user ka msg ai ko bhej rhe h or ai ka response hame milega
     try {
-        const response = await geminimodel.invoke([
-            new HumanMessage(message) // user ka message aayega idhr
-        ])
+        const response = await geminimodel.invoke(messages.map(msg=>{
+            if(msg.role == "user"){
+                return new HumanMessage(msg.content)
+            }else if(msg.role == "ai"){
+                return new AIMessage(msg.content)
+            }
+        }))
 
         return response.text
         // console.log(response.text)
 
     } catch (error) {
         console.error("AI call failed:", error.message)
+        throw error
     }
 }
 
